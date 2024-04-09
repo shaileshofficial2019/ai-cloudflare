@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 import { BotAvatar } from "@/components/bot-avatar";
 import { Heading } from "@/components/heading";
@@ -50,12 +51,11 @@ const ConversationPage = () => {
 
 			setMessages((current) => [...current, userMessage, res]);
 
-
 			form.reset();
 		} catch (error: any) {
 			if (error?.response?.status === 403) {
-        return
-      } else {
+				return;
+			} else {
 				toast.error("Something went wrong.");
 			}
 		} finally {
@@ -126,9 +126,9 @@ const ConversationPage = () => {
 						<Empty label="No conversation started." />
 					)}
 					<div className="flex flex-col-reverse gap-y-4">
-						{messages.map((message) => (
+						{messages.map((message, i) => (
 							<div
-								key={message.content}
+								key={i + "7"}
 								className={cn(
 									"p-8 w-full flex items-start gap-x-8 rounded-lg",
 									message.role === "user"
@@ -137,7 +137,21 @@ const ConversationPage = () => {
 								)}
 							>
 								{message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-								<p className="text-sm">{message.content}</p>
+								<ReactMarkdown
+									components={{
+										pre: ({ node, ...props }) => (
+											<div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+												<pre {...props} />
+											</div>
+										),
+										code: ({ node, ...props }) => (
+											<code className="bg-black/10 rounded-lg p-1" {...props} />
+										),
+									}}
+									className="text-sm overflow-hidden leading-7"
+								>
+									{message.content || ""}
+								</ReactMarkdown>
 							</div>
 						))}
 					</div>
