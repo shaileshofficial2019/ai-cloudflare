@@ -1,5 +1,5 @@
 # AI App for Chat, Code Copilot, Translation, Image Generation
-![ai-app-banner](/public/banner.png)
+![ai-app-banner](https://ai-cloudflare.pages.dev/banner.png)
 ## Details of AI Models used
 
 | Type             | Model Name |
