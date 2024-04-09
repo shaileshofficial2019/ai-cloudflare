@@ -1,3 +1,5 @@
+# AI App for Chat, Code Copilot, Translation, Image Generation
+![ai-app-banner](/public/banner.png)
 ## Details of AI Models used
 
 | Type             | Model Name |
